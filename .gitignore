@@ -24,7 +24,8 @@ classes
 gradlew
 gradlew.bat
 .gradle
-gradle
+gradle/
+build/
 
 
 
