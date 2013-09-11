@@ -11,7 +11,7 @@
 # generated files
 bin/
 gen/
-
+doc/
 
 #intellij IDEA - Android studio
 .idea
