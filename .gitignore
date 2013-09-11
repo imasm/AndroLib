@@ -11,7 +11,7 @@
 # generated files
 bin/
 gen/
-
+doc/
 
 #intellij IDEA - Android studio
 .idea
@@ -24,7 +24,8 @@ classes
 gradlew
 gradlew.bat
 .gradle
-gradle
+gradle/
+build/
 
 
 
