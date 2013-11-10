@@ -33,10 +33,11 @@ import java.net.UnknownHostException;
  * //Extend Application class and initialize log level
  * public class MyApplication extends Application {
  *
- * @Override public void onCreate() {
- * ULog.setTag("ApplicationName");
- * ULog.setLevel(ALog.Level.D);
- * }
+ *     @Override public void onCreate() {
+ *         super.onCreate();
+ *         ULog.setTag("ApplicationName");
+ *         ULog.setLevel(ULog.Level.D);
+ *     }
  * }
  * <p/>
  * Usage:
