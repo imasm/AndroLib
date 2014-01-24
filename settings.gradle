@@ -1,1 +1,1 @@
-include ':AndroLib'
+include ':AndroLib', ':AndroLib-Support'
