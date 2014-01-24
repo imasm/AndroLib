@@ -3,25 +3,47 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
+        classpath 'com.android.tools.build:gradle:0.8.+'
     }
 }
-apply plugin: 'android'
+apply plugin: 'android-library'
 
 repositories {
     mavenCentral()
 }
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 18
     buildToolsVersion "19.0.1"
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 11
         targetSdkVersion 16
+        versionCode 1
+        versionName "1.0"
+    }
+
+    release {
+        runProguard false
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
     }
 }
 
 dependencies {
     compile 'com.android.support:support-v4:+'
 }
+
+
+// This is the actual solution, as in http://stackoverflow.com/a/19037807/1002054
+task clearJar(type: Delete) {
+    delete 'build/libs/androlib.jar'
+}
+
+task makeJar(type: Copy) {
+    from('build/bundles/release/')
+    into('build/libs/')
+    include('classes.jar')
+    rename ('classes.jar', 'androlib.jar')
+}
+
+makeJar.dependsOn(clearJar, build)
