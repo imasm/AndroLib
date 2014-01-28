@@ -1,31 +1,16 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.8.+'
-    }
-}
 apply plugin: 'android-library'
-
-repositories {
-    mavenCentral()
-}
+apply plugin: 'maven'
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion "19.0.1"
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 7
-        targetSdkVersion 16
-        versionCode 1
-        versionName "1.0"
-    }
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
 
-    release {
-        runProguard false
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
     }
 }
 
@@ -33,16 +18,35 @@ dependencies {
     compile 'com.android.support:support-v4:+'
 }
 
+version rootProject.publishVersion
+group rootProject.publishGroup
+
+
+// Install - upload aar library to local maven repository
+// ---------------------------------------------------------------------------------
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository url: 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
+        }
+    }
+}
+
+task install(dependsOn: uploadArchives)
+
+
+// makeJar - Create jar file in builds/libs
+// ---------------------------------------------------------------------------------
 // This is the actual solution, as in http://stackoverflow.com/a/19037807/1002054
 task clearJar(type: Delete) {
-    delete 'build/libs/androlib-support.jar'
+    delete 'build/libs/' + project.name + '-' + rootProject.versionName + '.jar'
 }
 
 task makeJar(type: Copy) {
     from('build/bundles/release/')
-into('build/libs/')
-include('classes.jar')
-rename ('classes.jar', 'androlib-support.jar')
+    into('build/libs/')
+    include('classes.jar')
+    rename ('classes.jar', project.name + '-' + rootProject.versionName + '.jar')
 }
 
 makeJar.dependsOn(clearJar, build)
