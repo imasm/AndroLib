@@ -1,6 +1,7 @@
 apply plugin: 'android-library'
 apply plugin: 'maven'
 
+
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
@@ -18,6 +19,7 @@ dependencies {
     compile 'com.android.support:support-v4:+'
 }
 
+archivesBaseName = 'androlib-support'
 version rootProject.publishVersion
 group rootProject.publishGroup
 
@@ -39,7 +41,7 @@ task install(dependsOn: uploadArchives)
 // ---------------------------------------------------------------------------------
 // This is the actual solution, as in http://stackoverflow.com/a/19037807/1002054
 task clearJar(type: Delete) {
-    delete 'build/libs/' + project.name + '-' + rootProject.versionName + '.jar'
+        delete 'build/libs/' + project.name + '-' + rootProject.versionName + '.jar'
 }
 
 task makeJar(type: Copy) {

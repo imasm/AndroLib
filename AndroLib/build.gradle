@@ -1,8 +1,6 @@
 apply plugin: 'android-library'
 apply plugin: 'maven'
 
-version rootProject.publishVersion
-group rootProject.publishGroup
 
 
 android {
@@ -17,6 +15,12 @@ android {
         versionName rootProject.versionName
     }
 }
+
+
+archivesBaseName = 'androlib'
+version rootProject.publishVersion
+group rootProject.publishGroup
+
 
 // Install - upload aar library to local maven repository
 // ---------------------------------------------------------------------------------
