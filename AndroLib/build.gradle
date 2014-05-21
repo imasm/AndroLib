@@ -1,16 +1,6 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
-    }
-}
-apply plugin: 'android'
+apply plugin: 'android-library'
+apply plugin: 'maven'
 
-repositories {
-    mavenCentral()
-}
 
 android {
     compileSdkVersion 19
@@ -33,3 +23,37 @@ android {
 dependencies {
 	compile fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+
+// Install - upload aar library to local maven repository
+// ---------------------------------------------------------------------------------
+archivesBaseName = 'androlib'
+version "1.0"
+group "net.compactsys"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository url: 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
+        }
+    }
+}
+
+task install(dependsOn: uploadArchives)
+
+
+// makeJar - Create jar file in builds/libs
+// ---------------------------------------------------------------------------------
+// This is the actual solution, as in http://stackoverflow.com/a/19037807/1002054
+task clearJar(type: Delete) {
+    delete 'build/libs/' + project.name + '-' + project.version + '.jar'
+}
+
+task makeJar(type: Copy) {
+    from('build/bundles/release/')
+    into('build/libs/')
+    include('classes.jar')
+    rename ('classes.jar', project.name + '-' + project.version + '.jar')
+}
+
+makeJar.dependsOn(clearJar, build)
