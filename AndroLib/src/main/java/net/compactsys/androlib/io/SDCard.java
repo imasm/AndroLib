@@ -6,6 +6,10 @@ import java.io.File;
 
 public class SDCard {
 
+    /**
+     * Checks if sdcard is available
+     * @return true or false
+     */
     public static boolean isAvailable() {
         String state = Environment.getExternalStorageState();
 
@@ -23,6 +27,10 @@ public class SDCard {
         }
     }
 
+    /**
+     * Checks if sdcard is writeable
+     * @return true or false
+     */
     public static boolean isWriteable() {
 
         // Check SD Storage
@@ -42,11 +50,17 @@ public class SDCard {
         }
     }
 
+    /**
+     * Return the primary external storage path
+     */
     public static String getSDCardPath() {
         File f = Environment.getExternalStorageDirectory();
         return f.getAbsolutePath();
     }
 
+    /**
+     * Return sdcard's folder full path
+     */
     public static File getSDCardPath(String folder) {
         return new File(Environment.getExternalStorageDirectory(), folder);
     }
