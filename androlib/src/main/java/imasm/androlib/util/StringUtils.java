@@ -16,10 +16,10 @@
  */
 
 
-package net.compactsys.androlib.util;
+package imasm.androlib.util;
 
 /**
- * <p>Operations on {@link java.lang.String} that are
+ * <p>Operations on {@link String} that are
  * <code>null</code> safe.</p>
  * <p/>
  * Based on org.apache.commons.lang.StringUtils
@@ -658,7 +658,11 @@ public final class StringUtils {
      * Removes similar characters from the beginning of the string.
      * <p/>
      * <pre>
-     * StringUtils.removeFirstN("0000012345", '0') = "1235"
+     * StringUtils.removeFirstN(null, '0') = null
+     * StringUtils.removeFirstN("", '0') = ""
+     * StringUtils.removeFirstN("0000012345", '0') = "12345"
+     * StringUtils.removeFirstN("     12345", ' ') = "12345"
+     * StringUtils.removeFirstN("1234500000", '0') = "1234500000"
      * </pre>
      *
      * @param str Original string
@@ -667,6 +671,10 @@ public final class StringUtils {
      *         from the start of the initial string.
      */
     public static String removeFirstN(String str, char ch) {
+
+        if (isEmpty(str))
+            return str;
+
         int start = 0;
         while ((start < str.length()) && (str.charAt(start) == ch)) {
             start++;
@@ -700,7 +708,7 @@ public final class StringUtils {
      * @param prefix the prefix to find, may be null
      * @return <code>true</code> if the String starts with the prefix, case sensitive, or
      *         both <code>null</code>
-     * @see java.lang.String#startsWith(String)
+     * @see String#startsWith(String)
      * @since 2.4
      */
     public static boolean startsWith(String str, String prefix) {
@@ -725,7 +733,7 @@ public final class StringUtils {
      * @param prefix the prefix to find, may be null
      * @return <code>true</code> if the String starts with the prefix, case insensitive, or
      *         both <code>null</code>
-     * @see java.lang.String#startsWith(String)
+     * @see String#startsWith(String)
      * @since 2.4
      */
     public static boolean startsWithIgnoreCase(String str, String prefix) {
@@ -741,7 +749,7 @@ public final class StringUtils {
      *                   (case insensitive) or not.
      * @return <code>true</code> if the String starts with the prefix or
      *         both <code>null</code>
-     * @see java.lang.String#startsWith(String)
+     * @see String#startsWith(String)
      */
     private static boolean startsWith(String str, String prefix, boolean ignoreCase) {
         if (str == null || prefix == null) {
@@ -775,7 +783,7 @@ public final class StringUtils {
      * @param suffix the suffix to find, may be null
      * @return <code>true</code> if the String ends with the suffix, case sensitive, or
      *         both <code>null</code>
-     * @see java.lang.String#endsWith(String)
+     * @see String#endsWith(String)
      * @since 2.4
      */
     public static boolean endsWith(String str, String suffix) {
@@ -801,7 +809,7 @@ public final class StringUtils {
      * @param suffix the suffix to find, may be null
      * @return <code>true</code> if the String ends with the suffix, case insensitive, or
      *         both <code>null</code>
-     * @see java.lang.String#endsWith(String)
+     * @see String#endsWith(String)
      * @since 2.4
      */
     public static boolean endsWithIgnoreCase(String str, String suffix) {
@@ -817,7 +825,7 @@ public final class StringUtils {
      *                   (case insensitive) or not.
      * @return <code>true</code> if the String starts with the prefix or
      *         both <code>null</code>
-     * @see java.lang.String#endsWith(String)
+     * @see String#endsWith(String)
      */
     private static boolean endsWith(String str, String suffix, boolean ignoreCase) {
         if (str == null || suffix == null) {
@@ -829,4 +837,72 @@ public final class StringUtils {
         int strOffset = str.length() - suffix.length();
         return str.regionMatches(ignoreCase, strOffset, suffix, 0, suffix.length());
     }
+
+    /**
+     * * Returns a new string that is a substring of a string.
+     * Is Like substring but second parameter <code>len</code> indicates
+     * the number of chars to extract.
+     * <p>
+     * Examples:
+     * <blockquote><pre>
+     * StringUtils.extract("", *) = ""
+     * StringUtils.extract(null, *) = null
+     * StringUtils.extract("hamburger", 0) = "hamburger"
+     * StringUtils.extract("hamburger", 2) = "mburger"
+     * StringUtils.extract("hamburger", -2) = "hamburger"
+     * StringUtils.extract("hamburger", 10) = ""
+     * </pre></blockquote>
+     *
+     * @param      start   the beginning index, inclusive.
+     * @return     the specified substring.
+     */
+    public static String extract(String s, int start) {
+        if (isEmpty(s))
+            return s;
+
+        if (start < 0)
+            start = 0;
+
+        return extract(s, start, s.length());
+    }
+
+    /**
+     * Returns a new string that is a substring of a string.
+     * Is Like substring but second parameter <code>len</code> indicates
+     * the number of chars to extract.
+     * <p>
+     * Examples:
+     * <blockquote><pre>
+     * StringUtils.extract("", *, *) = ""
+     * StringUtils.extract(null, *, *) = null
+     * StringUtils.extract("hamburger", 0, 10) = "hamburger"
+     * StringUtils.extract("hamburger", 2, 4) = "mbur"
+     * StringUtils.extract("hamburger", 0, 10) = "hamburger"
+     * StringUtils.extract("hamburger", -5, 10) = "hambu"
+     * StringUtils.extract("hamburger", -5, 2) = ""
+     * StringUtils.extract("hamburger", 10, 5) = ""
+     * </pre></blockquote>
+     *
+     * @param      start   the beginning index, inclusive.
+     * @param      len     number of chars to extract.
+     * @return     the specified substring.
+     */
+    public static String extract(String s, int start, int len) {
+        if (isEmpty(s))
+            return s;
+
+        if ((start > s.length()))
+            return "";
+
+        int end = Math.min(start + len, s.length());
+
+        if (end < 0)
+            return "";
+
+        if (start < 0)
+            start = 0;
+
+        return s.substring(start, end);
+    }
+
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.compactsys.androlib.text;
+package imasm.androlib.text;
 
 import java.io.BufferedReader;
 import java.io.IOException;

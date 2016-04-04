@@ -1,4 +1,4 @@
-package net.compactsys.androlib.io;
+package imasm.androlib.io;
 
 import android.os.Environment;
 

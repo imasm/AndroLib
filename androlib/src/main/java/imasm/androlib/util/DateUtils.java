@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.compactsys.androlib.util;
+package imasm.androlib.util;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -43,7 +43,7 @@ public class DateUtils {
      *
      * @param year        Year number
      * @param monthOfYear The month that was set (0-11) for compatibility
-     *                    with {@link java.util.Calendar}.
+     *                    with {@link Calendar}.
      * @param dayOfMonth  Day of Month
      * @return New date
      */
@@ -72,6 +72,58 @@ public class DateUtils {
         int dayofmonth = Integer.parseInt(date.substring(6, 6 + 2));
 
         return getDate(year, month - 1, dayofmonth);
+    }
+
+    /**
+     * Return the number of days between to dates
+     * @param time1 first date
+     * @param time2 secon date
+     * @return number of days
+     */
+    public static int daysBetween(long time1, long time2)
+    {
+        return (int)( (time2 - time1) / (1000 * 60 * 60 * 24));
+    }
+
+    /**
+     * Return the number of days between to dates
+     * @param date1 first date
+     * @param date2 secon date
+     * @return number of days
+     */
+    public static int daysBetween(Date date1, Date date2)
+    {
+        return daysBetween(date1.getTime(), date2.getTime());
+    }
+
+    /**
+     * Adds the specified number of days to the date.
+     */
+    public static Date addDays(Date date, int days) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, days);
+        return calendar.getTime();
+    }
+
+    /**
+     * Adds the specified number of hours to the date.
+     */
+    public static Date addHours(Date date, int hours) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, hours);
+        return calendar.getTime();
+    }
+
+    /**
+     * Adds the specified number of minutes to the date.
+     */
+    public static Date addMinutes(Date date, int minutes) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MINUTE, minutes);
+        return calendar.getTime();
     }
 }
 

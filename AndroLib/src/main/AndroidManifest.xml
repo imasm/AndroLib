@@ -1,10 +1,10 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.compactsys.androlib"
-    android:versionCode="1"
-    android:versionName="1.0">
+<manifest package="imasm.androlib"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16" />
+    <application
+        android:label="@string/app_name"
+        android:supportsRtl="true" >
 
-    <application />
+    </application>
 
 </manifest>

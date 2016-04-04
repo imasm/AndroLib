@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.compactsys.androlib.util;
+package imasm.androlib.util;
 
 import android.util.Log;
 
