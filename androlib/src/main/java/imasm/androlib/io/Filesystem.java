@@ -52,6 +52,14 @@ public class Filesystem {
                 return file.isFile() && file.getName().matches(fileRegExpFilter);
             }
         };
-        return directory != null && directory.exists()?directory.listFiles(filter):null;
+
+        File[] result = null;
+        if (directory != null && directory.exists())
+            result = directory.listFiles(filter);
+
+        if (result == null)
+            result = new File[0];
+
+        return result;
     }
 }
