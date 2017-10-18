@@ -48,6 +48,7 @@ public final class ULog {
     public static final int TRACE_DEEP = 5;
     private static String tag = "<tag unset>";
     private static Level level = Level.V;
+    private static boolean showContext = false;
 
     private ULog() {
 
@@ -61,6 +62,10 @@ public final class ULog {
         tag = t;
     }
 
+    public static void setShowContext(boolean showContext) {
+        showContext = showContext;
+    }
+
     private static LogContext getContext() {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
         StackTraceElement element = trace[TRACE_DEEP]; // frame below us; the caller
@@ -70,9 +75,13 @@ public final class ULog {
 
     private static String getMessage(String s, Object... args) {
         s = String.format(s, args);
-        LogContext c = getContext();
-        String msg = c.simpleClassName + "." + c.methodName + "@"
-                + c.lineNumber + ": " + s;
+        String msg = "";
+        if (showContext) {
+            LogContext c = getContext();
+            msg = "(" + c.simpleClassName + "." + c.methodName + "@"
+                    + c.lineNumber + ") ";
+        }
+        msg = msg + s;
         return msg;
     }
 
