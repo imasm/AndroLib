@@ -1,22 +1,42 @@
-package es.espuna.mant.utils;
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package imasm.androlib.util;
 
-import java.lang.reflect.Array;
-
+import android.text.TextUtils;
 
 public class NumberUtils {
 
-    public NumberUtils() {
-        super();
-    }
-
-
+    /**
+     * Converts the string representation of a number to its 'integer' equivalent.
+     * Returns zero if the conversion fails.
+     * @param str A string containing a number to convert
+     * @return A 'integer' equivalent to the number contained in str.
+     */
     public static int toInt(final String str) {
         return toInt(str, 0);
     }
 
+    /**
+     * Converts the string representation of a number to its 'integer' equivalent.
+     * Returns defaultValue if the conversion fails.
+     * @param str A string containing a number to convert
+     * @param defaultValue The default value
+     * @return A 'integer' equivalent to the number contained in str.
+     */
     public static int toInt(final String str, final int defaultValue) {
-        if(str == null) {
+        if (TextUtils.isEmpty(str)) {
             return defaultValue;
         }
         try {
@@ -26,12 +46,25 @@ public class NumberUtils {
         }
     }
 
+    /**
+     * Converts the string representation of a number to its 'long' equivalent.
+     * Returns zero if the conversion fails.
+     * @param str A string containing a number to convert
+     * @return A 'long' equivalent to the number contained in str.
+     */
     public static long toLong(final String str) {
         return toLong(str, 0L);
     }
 
+    /**
+     * Converts the string representation of a number to its 'long' equivalent.
+     * Returns defaultValue if the conversion fails.
+     * @param str A string containing a number to convert
+     * @param defaultValue The default value
+     * @return A 'long' equivalent to the number contained in str.
+     */
     public static long toLong(final String str, final long defaultValue) {
-        if (str == null) {
+        if (TextUtils.isEmpty(str)) {
             return defaultValue;
         }
         try {
@@ -41,12 +74,25 @@ public class NumberUtils {
         }
     }
 
+    /**
+     * Converts the string representation of a number to its 'float' equivalent.
+     * Returns zero if the conversion fails.
+     * @param str A string containing a number to convert
+     * @return A 'float' equivalent to the number contained in str.
+     */
     public static float toFloat(final String str) {
         return toFloat(str, 0.0f);
     }
 
+    /**
+     * Converts the string representation of a number to its 'float' equivalent.
+     * Returns defaultValue if the conversion fails.
+     * @param str A string containing a number to convert
+     * @param defaultValue The default value
+     * @return A 'float' equivalent to the number contained in str.
+     */
     public static float toFloat(final String str, final float defaultValue) {
-        if (str == null) {
+        if (TextUtils.isEmpty(str)) {
             return defaultValue;
         }
         try {
@@ -56,12 +102,25 @@ public class NumberUtils {
         }
     }
 
+    /**
+     * Converts the string representation of a number to its 'double' equivalent.
+     * Returns zero if the conversion fails.
+     * @param str A string containing a number to convert
+     * @return A 'double' equivalent to the number contained in str.
+     */
     public static double toDouble(final String str) {
         return toDouble(str, 0.0d);
     }
 
+    /**
+     * Converts the string representation of a number to its 'double' equivalent.
+     * Returns defaultValue if the conversion fails.
+     * @param str A string containing a number to convert
+     * @param defaultValue The default value
+     * @return A 'double' equivalent to the number contained in str.
+     */
     public static double toDouble(final String str, final double defaultValue) {
-        if (str == null) {
+        if (TextUtils.isEmpty(str)) {
             return defaultValue;
         }
         try {
@@ -71,12 +130,25 @@ public class NumberUtils {
         }
     }
 
+    /**
+     * Converts the string representation of a number to its 'byte' equivalent.
+     * Returns zero if the conversion fails.
+     * @param str A string containing a number to convert
+     * @return A 'byte' equivalent to the number contained in str.
+     */
     public static byte toByte(final String str) {
         return toByte(str, (byte) 0);
     }
 
+    /**
+     * Converts the string representation of a number to its 'byte' equivalent.
+     * Returns defaultValue if the conversion fails.
+     * @param str A string containing a number to convert
+     * @param defaultValue The default value
+     * @return A 'byte' equivalent to the number contained in str.
+     */
     public static byte toByte(final String str, final byte defaultValue) {
-        if(str == null) {
+        if (TextUtils.isEmpty(str)) {
             return defaultValue;
         }
         try {
@@ -86,12 +158,25 @@ public class NumberUtils {
         }
     }
 
+    /**
+     * Converts the string representation of a number to its 'short' equivalent.
+     * Returns zero if the conversion fails.
+     * @param str A string containing a number to convert
+     * @return A 'short' equivalent to the number contained in str.
+     */
     public static short toShort(final String str) {
         return toShort(str, (short) 0);
     }
 
+    /**
+     * Converts the string representation of a number to its 'short' equivalent.
+     * Returns defaultValue if the conversion fails.
+     * @param str A string containing a number to convert
+     * @param defaultValue The default value
+     * @return A 'short' equivalent to the number contained in str.
+     */
     public static short toShort(final String str, final short defaultValue) {
-        if(str == null) {
+        if (TextUtils.isEmpty(str)) {
             return defaultValue;
         }
         try {
@@ -99,346 +184,5 @@ public class NumberUtils {
         } catch (final NumberFormatException nfe) {
             return defaultValue;
         }
-    }
-    private static boolean isAllZeros(final String str) {
-        if (str == null) {
-            return true;
-        }
-        for (int i = str.length() - 1; i >= 0; i--) {
-            if (str.charAt(i) != '0') {
-                return false;
-            }
-        }
-        return str.length() > 0;
-    }
-
-    // Min in array
-    //--------------------------------------------------------------------
-    public static long min(final long... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns min
-        long min = array[0];
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] < min) {
-                min = array[i];
-            }
-        }
-
-        return min;
-    }
-
-    public static int min(final int... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns min
-        int min = array[0];
-        for (int j = 1; j < array.length; j++) {
-            if (array[j] < min) {
-                min = array[j];
-            }
-        }
-
-        return min;
-    }
-
-    public static short min(final short... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns min
-        short min = array[0];
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] < min) {
-                min = array[i];
-            }
-        }
-
-        return min;
-    }
-
-    public static byte min(final byte... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns min
-        byte min = array[0];
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] < min) {
-                min = array[i];
-            }
-        }
-
-        return min;
-    }
-
-    public static double min(final double... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns min
-        double min = array[0];
-        for (int i = 1; i < array.length; i++) {
-            if (Double.isNaN(array[i])) {
-                return Double.NaN;
-            }
-            if (array[i] < min) {
-                min = array[i];
-            }
-        }
-
-        return min;
-    }
-
-    public static float min(final float... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns min
-        float min = array[0];
-        for (int i = 1; i < array.length; i++) {
-            if (Float.isNaN(array[i])) {
-                return Float.NaN;
-            }
-            if (array[i] < min) {
-                min = array[i];
-            }
-        }
-
-        return min;
-    }
-
-    // Max in array
-    //--------------------------------------------------------------------
-    public static long max(final long... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns max
-        long max = array[0];
-        for (int j = 1; j < array.length; j++) {
-            if (array[j] > max) {
-                max = array[j];
-            }
-        }
-
-        return max;
-    }
-
-    public static int max(final int... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns max
-        int max = array[0];
-        for (int j = 1; j < array.length; j++) {
-            if (array[j] > max) {
-                max = array[j];
-            }
-        }
-
-        return max;
-    }
-
-    public static short max(final short... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns max
-        short max = array[0];
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] > max) {
-                max = array[i];
-            }
-        }
-
-        return max;
-    }
-
-    public static byte max(final byte... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns max
-        byte max = array[0];
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] > max) {
-                max = array[i];
-            }
-        }
-
-        return max;
-    }
-
-    public static double max(final double... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns max
-        double max = array[0];
-        for (int j = 1; j < array.length; j++) {
-            if (Double.isNaN(array[j])) {
-                return Double.NaN;
-            }
-            if (array[j] > max) {
-                max = array[j];
-            }
-        }
-
-        return max;
-    }
-
-    public static float max(final float... array) {
-        // Validates input
-        validateArray(array);
-
-        // Finds and returns max
-        float max = array[0];
-        for (int j = 1; j < array.length; j++) {
-            if (Float.isNaN(array[j])) {
-                return Float.NaN;
-            }
-            if (array[j] > max) {
-                max = array[j];
-            }
-        }
-
-        return max;
-    }
-
-    private static void validateArray(final Object array) {
-        Validate.isTrue(array != null, "The Array must not be null");
-        Validate.isTrue(Array.getLength(array) != 0, "Array cannot be empty.");
-    }
-
-    // 3 param min
-    //-----------------------------------------------------------------------
-
-    public static long min(long a, final long b, final long c) {
-        if (b < a) {
-            a = b;
-        }
-        if (c < a) {
-            a = c;
-        }
-        return a;
-    }
-
-
-    public static int min(int a, final int b, final int c) {
-        if (b < a) {
-            a = b;
-        }
-        if (c < a) {
-            a = c;
-        }
-        return a;
-    }
-
-    public static short min(short a, final short b, final short c) {
-        if (b < a) {
-            a = b;
-        }
-        if (c < a) {
-            a = c;
-        }
-        return a;
-    }
-
-    public static byte min(byte a, final byte b, final byte c) {
-        if (b < a) {
-            a = b;
-        }
-        if (c < a) {
-            a = c;
-        }
-        return a;
-    }
-
-    public static double min(final double a, final double b, final double c) {
-        return Math.min(Math.min(a, b), c);
-    }
-
-    public static float min(final float a, final float b, final float c) {
-        return Math.min(Math.min(a, b), c);
-    }
-
-    // 3 param max
-    //-----------------------------------------------------------------------
-
-    public static long max(long a, final long b, final long c) {
-        if (b > a) {
-            a = b;
-        }
-        if (c > a) {
-            a = c;
-        }
-        return a;
-    }
-
-    public static int max(int a, final int b, final int c) {
-        if (b > a) {
-            a = b;
-        }
-        if (c > a) {
-            a = c;
-        }
-        return a;
-    }
-
-    public static short max(short a, final short b, final short c) {
-        if (b > a) {
-            a = b;
-        }
-        if (c > a) {
-            a = c;
-        }
-        return a;
-    }
-
-    public static byte max(byte a, final byte b, final byte c) {
-        if (b > a) {
-            a = b;
-        }
-        if (c > a) {
-            a = c;
-        }
-        return a;
-    }
-
-    public static double max(final double a, final double b, final double c) {
-        return Math.max(Math.max(a, b), c);
-    }
-
-    public static float max(final float a, final float b, final float c) {
-        return Math.max(Math.max(a, b), c);
-    }
-
-
-    public static int compare(final int x, final int y) {
-        if (x == y) {
-            return 0;
-        }
-        return x < y ? -1 : 1;
-    }
-
-    public static int compare(final long x, final long y) {
-        if (x == y) {
-            return 0;
-        }
-        return x < y ? -1 : 1;
-    }
-
-    public static int compare(final short x, final short y) {
-        if (x == y) {
-            return 0;
-        }
-        return x < y ? -1 : 1;
-    }
-
-    public static int compare(final byte x, final byte y) {
-        return x - y;
     }
 }

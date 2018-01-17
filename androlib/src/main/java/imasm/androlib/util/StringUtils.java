@@ -1,7 +1,4 @@
-
 /*
- * Copyright 2012 Ivan Masmitjà
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -153,7 +150,7 @@ public final class StringUtils {
                 }
                 return new String(output2);
             default:
-                StringBuffer buf = new StringBuffer(outputLength);
+                StringBuilder buf = new StringBuilder(outputLength);
                 for (int i = 0; i < repeat; i++) {
                     buf.append(str);
                 }
@@ -755,6 +752,8 @@ public final class StringUtils {
         if (str == null || prefix == null) {
             return (str == null && prefix == null);
         }
+
+        //noinspection SimplifiableIfStatement
         if (prefix.length() > str.length()) {
             return false;
         }
