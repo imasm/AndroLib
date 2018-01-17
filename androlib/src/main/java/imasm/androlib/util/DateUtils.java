@@ -77,7 +77,7 @@ public class DateUtils {
     /**
      * Return the number of days between to dates
      * @param time1 first date
-     * @param time2 secon date
+     * @param time2 second date
      * @return number of days
      */
     public static int daysBetween(long time1, long time2)
@@ -88,7 +88,7 @@ public class DateUtils {
     /**
      * Return the number of days between to dates
      * @param date1 first date
-     * @param date2 secon date
+     * @param date2 second date
      * @return number of days
      */
     public static int daysBetween(Date date1, Date date2)
@@ -123,6 +123,26 @@ public class DateUtils {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.MINUTE, minutes);
+        return calendar.getTime();
+    }
+    
+    /**
+    * Gets the current date.
+    */
+    public static Date today() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
+
+    /**
+    * Gets the current date and time.
+    */
+    public static Date now() {
+        Calendar calendar = Calendar.getInstance();
         return calendar.getTime();
     }
 }
