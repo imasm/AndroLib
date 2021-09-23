@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package imasm.androlib.io;
+package dev.imasm.androlib.io;
 
 import java.io.File;
 import java.io.FileFilter;

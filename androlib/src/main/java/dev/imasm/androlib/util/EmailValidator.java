@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package imasm.androlib.util;
+package dev.imasm.androlib.util;
 
 import java.io.Serializable;
 import java.util.ArrayList;

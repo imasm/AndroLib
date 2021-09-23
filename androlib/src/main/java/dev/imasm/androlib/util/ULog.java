@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package imasm.androlib.util;
+package dev.imasm.androlib.util;
 
 import android.util.Log;
 
@@ -66,12 +66,12 @@ public final class ULog {
     private static LogContext getContext() {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
         StackTraceElement element = trace[TRACE_DEEP]; // frame below us; the caller
-        LogContext context = new LogContext(element);
-        return context;
+        return new LogContext(element);
     }
 
     private static String getMessage(String s, Object... args) {
-        s = String.format(s, args);
+        if (args.length > 0)
+            s = String.format(s, args);
         String msg = "";
         if (showContext) {
             LogContext c = getContext();
@@ -176,7 +176,7 @@ public final class ULog {
         V(1), D(2), I(3), W(4), E(5);
         private int value;
 
-        private Level(int value) {
+        Level(int value) {
             this.value = value;
         }
 

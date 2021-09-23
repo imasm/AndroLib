@@ -1,8 +1,8 @@
-package imasm.androlib;
+package dev.imasm.androlib;
 
 import org.junit.Test;
 
-import imasm.androlib.util.StringUtils;
+import dev.imasm.androlib.util.StringUtils;
 
 import static org.junit.Assert.*;
 

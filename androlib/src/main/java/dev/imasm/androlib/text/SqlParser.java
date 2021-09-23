@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package imasm.androlib.text;
+package dev.imasm.androlib.text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,7 +52,7 @@ public final class SqlParser {
                     }
                     // Append line if line is not empty or a single line comment
                 } else if (!line.startsWith("--") && !line.equals("")) {
-                    sql.append(" " + line);
+                    sql.append(" ").append(line);
                 } // Check for matching end comment
             } else if (multiLineComment.equals("/*")) {
                 if (line.endsWith("*/")) {

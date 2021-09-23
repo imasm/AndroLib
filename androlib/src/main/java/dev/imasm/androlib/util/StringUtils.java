@@ -13,7 +13,7 @@
  */
 
 
-package imasm.androlib.util;
+package dev.imasm.androlib.util;
 
 /**
  * <p>Operations on {@link String} that are

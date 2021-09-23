@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroLib.iml" filepath="$PROJECT_DIR$/AndroLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/androlib/androlib.iml" filepath="$PROJECT_DIR$/androlib/androlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroLib.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androlib/AndroLib.androlib.iml" filepath="$PROJECT_DIR$/.idea/modules/androlib/AndroLib.androlib.iml" />
     </modules>
   </component>
 </project>
